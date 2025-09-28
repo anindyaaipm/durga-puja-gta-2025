@@ -9,6 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Leaflet CSS for interactive map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <!-- Google Fonts for festive typography -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     
@@ -813,6 +815,145 @@
             background-color: var(--dark-red);
             border-color: var(--dark-red);
         }
+
+        /* ===== INTERACTIVE MAP SECTION ===== */
+        .map-section {
+            background: var(--light-red);
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+
+        .map-container {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .puja-map {
+            height: 500px;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        /* Custom map marker styles */
+        .custom-marker {
+            background: var(--primary-red);
+            border: 3px solid var(--white);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .custom-marker:hover {
+            background: var(--dark-red);
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Map popup styling */
+        .leaflet-popup-content-wrapper {
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .leaflet-popup-content {
+            margin: 15px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .popup-title {
+            color: var(--primary-red);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .popup-details {
+            margin-bottom: 1rem;
+        }
+
+        .popup-details p {
+            margin: 0.25rem 0;
+            font-size: 0.9rem;
+        }
+
+        .popup-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .popup-btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .popup-btn:hover {
+            text-decoration: none;
+        }
+
+        .btn-directions {
+            background: var(--primary-red);
+            color: var(--white);
+        }
+
+        .btn-directions:hover {
+            background: var(--dark-red);
+            color: var(--white);
+        }
+
+        .btn-facebook {
+            background: #1877f2;
+            color: var(--white);
+        }
+
+        .btn-facebook:hover {
+            background: #166fe5;
+            color: var(--white);
+        }
+
+        .btn-website {
+            background: var(--gold);
+            color: var(--text-dark);
+        }
+
+        .btn-website:hover {
+            background: #e6b800;
+            color: var(--text-dark);
+        }
+
+        /* ===== RESPONSIVE MAP ===== */
+        @media (max-width: 768px) {
+            .puja-map {
+                height: 400px;
+            }
+            
+            .map-section {
+                padding: 2rem 0;
+            }
+            
+            .popup-actions {
+                flex-direction: column;
+            }
+            
+            .popup-btn {
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -925,11 +1066,37 @@
                 <!-- Puja cards will be populated by JavaScript -->
             </div>
         </section>
+
+        <!-- ===== INTERACTIVE MAP SECTION ===== -->
+        <section class="map-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="section-title text-center mb-4">
+                            <i class="fas fa-map-marked-alt text-festive"></i>
+                            Interactive Puja Map
+                        </h2>
+                        <p class="text-center text-muted mb-4">
+                            Click on the markers to see puja details and get directions
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="map-container">
+                            <div id="pujaMap" class="puja-map"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
 
       <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Leaflet JS for interactive map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
 
     <!-- ===== FLOATING ITINERARY BUTTON ===== -->
@@ -1159,6 +1326,9 @@
             
             // Itinerary functionality
             initializeItinerary();
+            
+            // Initialize map
+            initializeMap();
             
             // Initial render
             handleSearch();
@@ -1409,9 +1579,207 @@
             return text;
         }
 
+        // ===== INTERACTIVE MAP FUNCTIONALITY =====
+        let pujaMap;
+        let mapMarkers = [];
+
+        function initializeMap() {
+            // Initialize the map centered on GTA area
+            pujaMap = L.map('pujaMap').setView([43.6532, -79.3832], 10);
+
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(pujaMap);
+
+            // Add markers for all pujas
+            addPujaMarkers();
+        }
+
+        function addPujaMarkers() {
+            // Clear existing markers
+            mapMarkers.forEach(marker => pujaMap.removeLayer(marker));
+            mapMarkers = [];
+
+            pujaData.forEach((puja, index) => {
+                // Geocode the address to get coordinates
+                geocodeAddress(puja.address, (lat, lng) => {
+                    if (lat && lng) {
+                        // Create custom marker with area-based color
+                        const markerColor = getMarkerColor(puja.address);
+                        const marker = L.marker([lat, lng], {
+                            icon: L.divIcon({
+                                className: 'custom-marker',
+                                html: `<div class="custom-marker" style="background-color: ${markerColor};">${index + 1}</div>`,
+                                iconSize: [30, 30],
+                                iconAnchor: [15, 15]
+                            })
+                        });
+
+                        // Create popup content
+                        const popupContent = createPopupContent(puja);
+                        marker.bindPopup(popupContent);
+
+                        // Add marker to map
+                        marker.addTo(pujaMap);
+                        mapMarkers.push(marker);
+                    }
+                });
+            });
+        }
+
+        // Predefined coordinates for major GTA areas
+        const gtaCoordinates = {
+            'Toronto': [43.6532, -79.3832],
+            'Scarborough': [43.7731, -79.2578],
+            'North York': [43.7615, -79.4111],
+            'Etobicoke': [43.6435, -79.5656],
+            'York': [43.6938, -79.5029],
+            'East York': [43.6905, -79.3277],
+            'Mississauga': [43.5890, -79.6441],
+            'Brampton': [43.6834, -79.7663],
+            'Markham': [43.8668, -79.2663],
+            'Richmond Hill': [43.8828, -79.4403],
+            'Vaughan': [43.8361, -79.4983],
+            'Ajax': [43.8508, -79.0203],
+            'Pickering': [43.8354, -79.0863],
+            'Whitby': [43.8975, -78.9428],
+            'Oshawa': [43.8971, -78.8658],
+            'Waterloo': [43.4643, -80.5204],
+            'Guelph': [43.5448, -80.2482],
+            'London': [42.9849, -81.2453],
+            'Hamilton': [43.2557, -79.8711],
+            'Oakville': [43.4675, -79.6877],
+            'Burlington': [43.3255, -79.7990],
+            'Niagara Falls': [43.0896, -79.0849]
+        };
+
+        function geocodeAddress(address, callback) {
+            // First try to find coordinates based on city names in the address
+            const cityMatch = findCityInAddress(address);
+            if (cityMatch) {
+                callback(cityMatch[0], cityMatch[1]);
+                return;
+            }
+
+            // Use Nominatim (OpenStreetMap's geocoding service) - free, no API key required
+            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address + ', Ontario, Canada')}&limit=1`;
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        const lat = parseFloat(data[0].lat);
+                        const lng = parseFloat(data[0].lon);
+                        // Validate coordinates are in reasonable GTA area
+                        if (lat >= 43.0 && lat <= 44.5 && lng >= -80.5 && lng <= -78.5) {
+                            callback(lat, lng);
+                        } else {
+                            // Use fallback coordinates for the area
+                            const fallback = getFallbackCoordinates(address);
+                            callback(fallback[0], fallback[1]);
+                        }
+                    } else {
+                        // Use fallback coordinates for the area
+                        const fallback = getFallbackCoordinates(address);
+                        callback(fallback[0], fallback[1]);
+                    }
+                })
+                .catch(error => {
+                    console.log('Geocoding error:', error);
+                    // Use fallback coordinates for the area
+                    const fallback = getFallbackCoordinates(address);
+                    callback(fallback[0], fallback[1]);
+                });
+        }
+
+        function findCityInAddress(address) {
+            const addressLower = address.toLowerCase();
+            for (const [city, coords] of Object.entries(gtaCoordinates)) {
+                if (addressLower.includes(city.toLowerCase())) {
+                    return coords;
+                }
+            }
+            return null;
+        }
+
+        function getFallbackCoordinates(address) {
+            const cityMatch = findCityInAddress(address);
+            if (cityMatch) {
+                // Add small random offset to avoid overlapping markers
+                const offsetLat = (Math.random() - 0.5) * 0.01;
+                const offsetLng = (Math.random() - 0.5) * 0.01;
+                return [cityMatch[0] + offsetLat, cityMatch[1] + offsetLng];
+            }
+            // Default to Toronto if no city found
+            return [43.6532, -79.3832];
+        }
+
+        function getMarkerColor(address) {
+            const addressLower = address.toLowerCase();
+            
+            // Color coding by region
+            if (addressLower.includes('toronto') || addressLower.includes('scarborough') || 
+                addressLower.includes('north york') || addressLower.includes('etobicoke') || 
+                addressLower.includes('york') || addressLower.includes('east york')) {
+                return '#d32f2f'; // Red for Toronto area
+            } else if (addressLower.includes('mississauga') || addressLower.includes('brampton') || 
+                       addressLower.includes('oakville') || addressLower.includes('burlington')) {
+                return '#1976d2'; // Blue for Peel/Halton region
+            } else if (addressLower.includes('markham') || addressLower.includes('richmond hill') || 
+                       addressLower.includes('vaughan')) {
+                return '#388e3c'; // Green for York region
+            } else if (addressLower.includes('ajax') || addressLower.includes('pickering') || 
+                       addressLower.includes('whitby') || addressLower.includes('oshawa')) {
+                return '#f57c00'; // Orange for Durham region
+            } else if (addressLower.includes('waterloo') || addressLower.includes('guelph')) {
+                return '#7b1fa2'; // Purple for Waterloo region
+            } else if (addressLower.includes('london')) {
+                return '#5d4037'; // Brown for London
+            } else if (addressLower.includes('hamilton')) {
+                return '#455a64'; // Blue-grey for Hamilton
+            } else if (addressLower.includes('niagara')) {
+                return '#e91e63'; // Pink for Niagara
+            } else {
+                return '#d32f2f'; // Default red
+            }
+        }
+
+        function createPopupContent(puja) {
+            const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(puja.address)}`;
+            const linkType = puja.facebook.includes('facebook.com') ? 'Facebook' : 'Website';
+            const linkIcon = puja.facebook.includes('facebook.com') ? 'fab fa-facebook' : 'fas fa-globe';
+            const linkClass = puja.facebook.includes('facebook.com') ? 'btn-facebook' : 'btn-website';
+
+            return `
+                <div class="popup-content">
+                    <div class="popup-title">${puja.name}</div>
+                    <div class="popup-details">
+                        <p><strong>📅 Dates:</strong> ${puja.dates}</p>
+                        <p><strong>📍 Address:</strong> ${puja.address}</p>
+                    </div>
+                    <div class="popup-actions">
+                        <a href="${googleMapsUrl}" target="_blank" class="popup-btn btn-directions">
+                            <i class="fas fa-directions"></i> Directions
+                        </a>
+                        ${puja.facebook ? `
+                            <a href="${puja.facebook}" target="_blank" class="popup-btn ${linkClass}">
+                                <i class="${linkIcon}"></i> ${linkType}
+                            </a>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
         // ===== RESPONSIVE BEHAVIOR =====
         window.addEventListener('resize', function() {
             // Handle responsive behavior if needed
+            if (pujaMap) {
+                setTimeout(() => {
+                    pujaMap.invalidateSize();
+                }, 100);
+            }
         });
     </script>
 </body>
