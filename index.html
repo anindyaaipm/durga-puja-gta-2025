@@ -204,6 +204,318 @@
             font-weight: 600;
         }
 
+        /* ===== FLOATING ITINERARY BUTTON ===== */
+        .floating-itinerary-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-red);
+            color: var(--white);
+            border: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .floating-itinerary-btn:hover {
+            background: var(--dark-red);
+            transform: scale(1.1);
+        }
+
+        .itinerary-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--gold);
+            color: var(--text-dark);
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* ===== ITINERARY SIDEBAR ===== */
+        .itinerary-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+            z-index: 1001;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .itinerary-sidebar.open {
+            right: 0;
+        }
+
+        .sidebar-header {
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-header h4 {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .close-sidebar {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .close-sidebar:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .sidebar-content {
+            padding: 1.5rem;
+        }
+
+        .itinerary-list {
+            margin-bottom: 2rem;
+        }
+
+        .itinerary-item {
+            background: var(--light-red);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-red);
+        }
+
+        .itinerary-item h6 {
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .itinerary-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .sidebar-actions {
+            border-top: 1px solid var(--light-red);
+            padding-top: 1.5rem;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== RESPONSIVE ITINERARY ===== */
+        @media (max-width: 768px) {
+            .itinerary-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .floating-itinerary-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* ===== FLOATING ITINERARY BUTTON ===== */
+        .floating-itinerary-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-red);
+            color: var(--white);
+            border: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .floating-itinerary-btn:hover {
+            background: var(--dark-red);
+            transform: scale(1.1);
+        }
+
+        .itinerary-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--gold);
+            color: var(--text-dark);
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* ===== ITINERARY SIDEBAR ===== */
+        .itinerary-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+            z-index: 1001;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .itinerary-sidebar.open {
+            right: 0;
+        }
+
+        .sidebar-header {
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-header h4 {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .close-sidebar {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .close-sidebar:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .sidebar-content {
+            padding: 1.5rem;
+        }
+
+        .itinerary-list {
+            margin-bottom: 2rem;
+        }
+
+        .itinerary-item {
+            background: var(--light-red);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-red);
+        }
+
+        .itinerary-item h6 {
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .itinerary-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .sidebar-actions {
+            border-top: 1px solid var(--light-red);
+            padding-top: 1.5rem;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== RESPONSIVE ITINERARY ===== */
+        @media (max-width: 768px) {
+            .itinerary-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .floating-itinerary-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
         /* ===== PUJA TABLE/CARDS STYLING ===== */
         .puja-container {
             background: var(--white);
@@ -222,12 +534,21 @@
             border: none;
             padding: 1rem;
             font-weight: 600;
+            text-align: center;
+        }
+
+        .puja-table th:first-child {
+            width: 120px;
         }
 
         .puja-table td {
             padding: 1rem;
             vertical-align: middle;
             border-color: var(--light-red);
+        }
+
+        .puja-table td:first-child {
+            text-align: center;
         }
 
         .puja-table tbody tr:hover {
@@ -590,7 +911,7 @@
                             <th>Puja Name</th>
                             <th>Date(s)</th>
                             <th>Address</th>
-                            <th>Facebook</th>
+                            <th>Facebook Link or Website</th>
                         </tr>
                     </thead>
                     <tbody id="pujaTableBody">
@@ -606,44 +927,72 @@
         </section>
     </div>
 
+
+      <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+
     <!-- ===== FLOATING ITINERARY BUTTON ===== -->
     <button class="floating-itinerary-btn" id="itineraryBtn">
-        <i class="fas fa-calendar-check"></i> My Itinerary
+        <i class="fas fa-list"></i>
         <span class="itinerary-count" id="itineraryCount">0</span>
     </button>
 
-    <!-- ===== SIDEBAR OVERLAY ===== -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
     <!-- ===== ITINERARY SIDEBAR ===== -->
     <div class="itinerary-sidebar" id="itinerarySidebar">
-        <div class="itinerary-header">
-            <h4><i class="fas fa-calendar-check"></i> My Itinerary</h4>
-            <button type="button" class="btn-close btn-close-white" id="closeSidebar"></button>
+        <div class="sidebar-header">
+            <h4><i class="fas fa-route"></i> My Itinerary</h4>
+            <button class="close-sidebar" id="closeSidebar">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
-        <div class="itinerary-content">
-            <div id="itineraryList">
-                <p class="text-center text-muted">No pujas added to itinerary yet.</p>
+        <div class="sidebar-content">
+            <div id="itineraryList" class="itinerary-list">
+                <p class="text-muted text-center">No pujas selected yet</p>
             </div>
-            <div class="share-buttons" id="shareButtons" style="display: none;">
-                <h6 class="text-festive mb-3">Share Your Itinerary</h6>
-                <button class="share-btn whatsapp" id="shareWhatsApp">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
+            <div class="sidebar-actions" id="sidebarActions" style="display: none;">
+                <button class="btn btn-festive w-100 mb-2" id="shareWhatsApp">
+                    <i class="fab fa-whatsapp"></i> Share on WhatsApp
                 </button>
-                <button class="share-btn facebook" id="shareFacebook">
-                    <i class="fab fa-facebook"></i> Facebook
+                <button class="btn btn-outline-primary w-100 mb-2" id="shareFacebook">
+                    <i class="fab fa-facebook"></i> Share on Facebook
                 </button>
-                <button class="share-btn email" id="shareEmail">
-                    <i class="fas fa-envelope"></i> Email
+                <button class="btn btn-outline-success w-100 mb-2" id="shareEmail">
+                    <i class="fas fa-envelope"></i> Email Itinerary
                 </button>
-                <button class="share-btn btn-outline-secondary" id="copyText">
-                    <i class="fas fa-copy"></i> Copy Text
+                <button class="btn btn-outline-secondary w-100" id="copyText">
+                    <i class="fas fa-copy"></i> Copy as Text
                 </button>
             </div>
         </div>
     </div>
 
-      <!-- Bootstrap JS -->
+    <!-- ===== SIDEBAR OVERLAY ===== -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>Happy Durga Puja!</h3>
+                    <p>May this festive season bring joy, prosperity, and blessings to you and your family.</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <p class="acknowledgement">
+                        <small>
+                            Created with ❤️ by 
+                            <a href="https://www.youtube.com/@NodesofTravel" target="_blank" class="footer-link">
+                                <i class="fab fa-youtube"></i> Nodes of Travel
+                            </a>
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
@@ -687,7 +1036,7 @@
             {
                 id: 6,
                 name: "Bharatsevasram",
-                dates: "Mostly Real Pujo Dates (27th Sep to 1st Oct)",
+                dates: "27th Sep to 1st Oct",
                 address: "2107 Codlin Crescent, Etobicoke",
                 facebook: "https://bsstoronto.org/"
             },
@@ -764,7 +1113,7 @@
             {
                 id: 17,
                 name: "Toronto Hindu Dharmashram",
-                dates: "Mostly Real Pujo Dates (27th Sep to 1st Oct)",
+                dates: "27th Sep to 1st Oct",
                 address: "1510 Birchmount Rd, Scarborough",
                 facebook: "http://www.hindudharmasram.com/"
             },
@@ -785,7 +1134,7 @@
             {
                 id: 20,
                 name: "Vedanta Society of Toronto",
-                dates: "Mostly Real Pujo Dates (27th Sep to 1st Oct)",
+                dates: "27th Sep to 1st Oct",
                 address: "Ramkrishna Mission - 120 Emmett Ave, York",
                 facebook: "https://vedantatoronto.ca/special-events"
             },
@@ -798,257 +1147,6 @@
             }
         ];
 
-        // ===== GLOBAL VARIABLES =====
-        let selectedPujas = [];
-        let filteredPujas = pujaData;
-
-        // ===== DOM ELEMENTS =====
-        const searchInput = document.getElementById('searchInput');
-        const pujaTableBody = document.getElementById('pujaTableBody');
-        const pujaCards = document.getElementById('pujaCards');
-        const itineraryBtn = document.getElementById('itineraryBtn');
-        const itinerarySidebar = document.getElementById('itinerarySidebar');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        const closeSidebar = document.getElementById('closeSidebar');
-        const itineraryList = document.getElementById('itineraryList');
-        const itineraryCount = document.getElementById('itineraryCount');
-        const shareButtons = document.getElementById('shareButtons');
-
-        // ===== INITIALIZATION =====
-        document.addEventListener('DOMContentLoaded', function() {
-            renderPujas();
-            setupEventListeners();
-        });
-
-        // ===== EVENT LISTENERS =====
-        function setupEventListeners() {
-            // Search functionality
-            searchInput.addEventListener('input', handleSearch);
-
-            // Itinerary sidebar
-            itineraryBtn.addEventListener('click', toggleSidebar);
-            closeSidebar.addEventListener('click', closeItinerarySidebar);
-            sidebarOverlay.addEventListener('click', closeItinerarySidebar);
-
-            // Share functionality
-            document.getElementById('shareWhatsApp').addEventListener('click', shareToWhatsApp);
-            document.getElementById('shareFacebook').addEventListener('click', shareToFacebook);
-            document.getElementById('shareEmail').addEventListener('click', shareToEmail);
-            document.getElementById('copyText').addEventListener('click', copyItineraryText);
-        }
-
-        // ===== SEARCH FUNCTIONALITY =====
-        function handleSearch() {
-            const searchTerm = searchInput.value.toLowerCase();
-            filteredPujas = pujaData.filter(puja => 
-                puja.name.toLowerCase().includes(searchTerm) ||
-                puja.dates.toLowerCase().includes(searchTerm) ||
-                puja.address.toLowerCase().includes(searchTerm)
-            );
-            renderPujas();
-        }
-
-        // ===== RENDER PUJAS =====
-        function renderPujas() {
-            renderTable();
-            renderCards();
-        }
-
-        function renderTable() {
-            pujaTableBody.innerHTML = '';
-            filteredPujas.forEach(puja => {
-                const row = document.createElement('tr');
-                const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(puja.address)}`;
-                const facebookButton = puja.facebook ? 
-                    `<a href="${puja.facebook}" target="_blank" class="btn btn-outline-primary btn-sm">
-                        <i class="fab fa-facebook"></i> Visit
-                    </a>` : 
-                    '<span class="text-muted">No link</span>';
-                
-                row.innerHTML = `
-                    <td>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" 
-                                   id="checkbox-${puja.id}" 
-                                   ${selectedPujas.includes(puja.id) ? 'checked' : ''}
-                                   onchange="togglePujaSelection(${puja.id})">
-                        </div>
-                    </td>
-                    <td><strong>${puja.name}</strong></td>
-                    <td>${puja.dates}</td>
-                    <td>
-                        <a href="${googleMapsUrl}" target="_blank" class="text-decoration-none">
-                            <i class="fas fa-map-marker-alt text-danger"></i> ${puja.address}
-                        </a>
-                    </td>
-                    <td>${facebookButton}</td>
-                `;
-                pujaTableBody.appendChild(row);
-            });
-        }
-
-        function renderCards() {
-            pujaCards.innerHTML = '';
-            filteredPujas.forEach(puja => {
-                const card = document.createElement('div');
-                const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(puja.address)}`;
-                const facebookLink = puja.facebook ? 
-                    `<a href="${puja.facebook}" target="_blank" class="facebook-link">
-                        <i class="fab fa-facebook"></i> Visit Facebook Page
-                    </a>` : 
-                    '<span class="text-muted">No Facebook page available</span>';
-                
-                card.className = 'puja-card';
-                card.innerHTML = `
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <h5 class="card-title">${puja.name}</h5>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" 
-                                   id="card-checkbox-${puja.id}" 
-                                   ${selectedPujas.includes(puja.id) ? 'checked' : ''}
-                                   onchange="togglePujaSelection(${puja.id})">
-                            <label class="form-check-label" for="card-checkbox-${puja.id}">
-                                Add to Itinerary
-                            </label>
-                        </div>
-                    </div>
-                    <p class="card-text"><strong>Dates:</strong> ${puja.dates}</p>
-                    <p class="card-text">
-                        <strong>Address:</strong> 
-                        <a href="${googleMapsUrl}" target="_blank" class="text-decoration-none">
-                            <i class="fas fa-map-marker-alt text-danger"></i> ${puja.address}
-                        </a>
-                    </p>
-                    <p class="card-text">${facebookLink}</p>
-                `;
-                pujaCards.appendChild(card);
-            });
-        }
-
-        // ===== PUJA SELECTION =====
-        function togglePujaSelection(pujaId) {
-            if (selectedPujas.includes(pujaId)) {
-                selectedPujas = selectedPujas.filter(id => id !== pujaId);
-            } else {
-                selectedPujas.push(pujaId);
-            }
-            updateItineraryCount();
-            renderPujas(); // Re-render to update checkbox states
-        }
-
-        // ===== ITINERARY MANAGEMENT =====
-        function updateItineraryCount() {
-            itineraryCount.textContent = selectedPujas.length;
-            if (selectedPujas.length > 0) {
-                itineraryBtn.style.display = 'block';
-            } else {
-                itineraryBtn.style.display = 'block'; // Always show button
-            }
-        }
-
-        function toggleSidebar() {
-            itinerarySidebar.classList.toggle('show');
-            sidebarOverlay.classList.toggle('show');
-            renderItinerary();
-        }
-
-        function closeItinerarySidebar() {
-            itinerarySidebar.classList.remove('show');
-            sidebarOverlay.classList.remove('show');
-        }
-
-        function renderItinerary() {
-            if (selectedPujas.length === 0) {
-                itineraryList.innerHTML = '<p class="text-center text-muted">No pujas added to itinerary yet.</p>';
-                shareButtons.style.display = 'none';
-                return;
-            }
-
-            const selectedPujaObjects = pujaData.filter(puja => selectedPujas.includes(puja.id));
-            
-            itineraryList.innerHTML = selectedPujaObjects.map(puja => {
-                const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(puja.address)}`;
-                return `
-                    <div class="itinerary-item">
-                        <h6>${puja.name}</h6>
-                        <p><strong>Dates:</strong> ${puja.dates}</p>
-                        <p><strong>Address:</strong> 
-                            <a href="${googleMapsUrl}" target="_blank" class="text-decoration-none">
-                                <i class="fas fa-map-marker-alt text-danger"></i> ${puja.address}
-                            </a>
-                        </p>
-                        <button class="btn btn-sm btn-outline-danger" onclick="removeFromItinerary(${puja.id})">
-                            <i class="fas fa-times"></i> Remove
-                        </button>
-                    </div>
-                `;
-            }).join('');
-
-            shareButtons.style.display = 'block';
-        }
-
-        function removeFromItinerary(pujaId) {
-            selectedPujas = selectedPujas.filter(id => id !== pujaId);
-            updateItineraryCount();
-            renderItinerary();
-            renderPujas(); // Update checkboxes
-        }
-
-        // ===== SHARE FUNCTIONALITY =====
-        function generateItineraryText() {
-            const selectedPujaObjects = pujaData.filter(puja => selectedPujas.includes(puja.id));
-            let text = "🎉 My Durga Puja 2025 Itinerary 🎉\n\n";
-            
-            selectedPujaObjects.forEach((puja, index) => {
-                text += `${index + 1}. ${puja.name}\n`;
-                text += `   📅 Dates: ${puja.dates}\n`;
-                text += `   📍 Address: ${puja.address}\n`;
-                text += `   🔗 Facebook: ${puja.facebook}\n\n`;
-            });
-            
-            text += "Happy Durga Puja! 🕉️";
-            return text;
-        }
-
-        function shareToWhatsApp() {
-            const text = generateItineraryText();
-            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
-            window.open(url, '_blank');
-        }
-
-        function shareToFacebook() {
-            const text = generateItineraryText();
-            const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(text)}`;
-            window.open(url, '_blank');
-        }
-
-        function shareToEmail() {
-            const text = generateItineraryText();
-            const subject = "My Durga Puja 2025 Itinerary";
-            const body = text;
-            const url = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            window.open(url);
-        }
-
-        function copyItineraryText() {
-            const text = generateItineraryText();
-            navigator.clipboard.writeText(text).then(() => {
-                // Show success message
-                const btn = document.getElementById('copyText');
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                btn.style.background = '#28a745';
-                
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.style.background = '';
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy text: ', err);
-                alert('Failed to copy text. Please try again.');
-            });
-        }
-
         // ===== SEARCH AND SORT FUNCTIONALITY =====
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
@@ -1058,6 +1156,9 @@
             // Search functionality
             searchInput.addEventListener('input', handleSearch);
             sortSelect.addEventListener('change', handleSearch);
+            
+            // Itinerary functionality
+            initializeItinerary();
             
             // Initial render
             handleSearch();
@@ -1101,7 +1202,7 @@
         }
 
         function renderTable(pujas) {
-            const tableBody = document.querySelector('#pujaTable tbody');
+            const tableBody = document.getElementById('pujaTableBody');
             if (!tableBody) return;
             
             tableBody.innerHTML = pujas.map(puja => {
@@ -1110,12 +1211,10 @@
                     <tr>
                         <td>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="${puja.id}" id="puja${puja.id}">
-                                <label class="form-check-label" for="puja${puja.id}">
-                                    ${puja.name}
-                                </label>
+                                <input class="form-check-input" type="checkbox" value="${puja.id}" id="puja${puja.id}" onchange="handleCheckboxChange(${puja.id}, this.checked)">
                             </div>
                         </td>
+                        <td>${puja.name}</td>
                         <td>${puja.dates}</td>
                         <td>
                             <a href="${googleMapsUrl}" target="_blank" class="text-decoration-none">
@@ -1123,9 +1222,12 @@
                             </a>
                         </td>
                         <td>
-                            <a href="${puja.facebook}" target="_blank" class="btn btn-sm btn-outline-primary">
-                                <i class="fab fa-facebook"></i> Facebook
-                            </a>
+                            ${puja.facebook ? 
+                                `<a href="${puja.facebook}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                    <i class="${puja.facebook.includes('facebook.com') ? 'fab fa-facebook' : 'fas fa-globe'}"></i> ${puja.facebook.includes('facebook.com') ? 'Facebook' : 'Website'}
+                                </a>` : 
+                                '<span class="text-muted">No link available</span>'
+                            }
                         </td>
                     </tr>
                 `;
@@ -1143,7 +1245,7 @@
                         <div class="card h-100 puja-card">
                             <div class="card-body">
                                 <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" value="${puja.id}" id="cardPuja${puja.id}">
+                                    <input class="form-check-input" type="checkbox" value="${puja.id}" id="cardPuja${puja.id}" onchange="handleCheckboxChange(${puja.id}, this.checked)">
                                     <label class="form-check-label" for="cardPuja${puja.id}">
                                         <h5 class="card-title">${puja.name}</h5>
                                     </label>
@@ -1155,9 +1257,12 @@
                                         <i class="fas fa-map-marker-alt text-danger"></i> ${puja.address}
                                     </a>
                                 </p>
-                                <a href="${puja.facebook}" target="_blank" class="btn btn-festive">
-                                    <i class="fab fa-facebook"></i> Facebook Page
-                                </a>
+                                ${puja.facebook ? 
+                                    `<a href="${puja.facebook}" target="_blank" class="btn btn-festive">
+                                        <i class="${puja.facebook.includes('facebook.com') ? 'fab fa-facebook' : 'fas fa-globe'}"></i> ${puja.facebook.includes('facebook.com') ? 'Facebook Page' : 'Website'}
+                                    </a>` : 
+                                    '<span class="text-muted">No link available</span>'
+                                }
                             </div>
                         </div>
                     </div>
@@ -1165,32 +1270,149 @@
             }).join('');
         }
 
+        // ===== ITINERARY FUNCTIONALITY =====
+        let selectedPujas = [];
+
+        function initializeItinerary() {
+            const itineraryBtn = document.getElementById('itineraryBtn');
+            const closeSidebar = document.getElementById('closeSidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            
+            // Itinerary sidebar
+            itineraryBtn.addEventListener('click', toggleSidebar);
+            closeSidebar.addEventListener('click', closeItinerarySidebar);
+            sidebarOverlay.addEventListener('click', closeItinerarySidebar);
+
+            // Share functionality
+            document.getElementById('shareWhatsApp').addEventListener('click', shareToWhatsApp);
+            document.getElementById('shareFacebook').addEventListener('click', shareToFacebook);
+            document.getElementById('shareEmail').addEventListener('click', shareToEmail);
+            document.getElementById('copyText').addEventListener('click', copyItineraryText);
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('itinerarySidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        function closeItinerarySidebar() {
+            const sidebar = document.getElementById('itinerarySidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        }
+
+        function updateItinerary() {
+            const itineraryList = document.getElementById('itineraryList');
+            const sidebarActions = document.getElementById('sidebarActions');
+            const itineraryCount = document.getElementById('itineraryCount');
+            
+            if (selectedPujas.length === 0) {
+                itineraryList.innerHTML = '<p class="text-muted text-center">No pujas selected yet</p>';
+                sidebarActions.style.display = 'none';
+            } else {
+                itineraryList.innerHTML = selectedPujas.map(puja => `
+                    <div class="itinerary-item">
+                        <h6>${puja.name}</h6>
+                        <p><strong>Dates:</strong> ${puja.dates}</p>
+                        <p><strong>Location:</strong> ${puja.address}</p>
+                        <button class="btn btn-sm btn-outline-danger" onclick="removeFromItinerary(${puja.id})">
+                            <i class="fas fa-times"></i> Remove
+                        </button>
+                    </div>
+                `).join('');
+                sidebarActions.style.display = 'block';
+            }
+            
+            itineraryCount.textContent = selectedPujas.length;
+        }
+
+        function addToItinerary(pujaId) {
+            const puja = pujaData.find(p => p.id === pujaId);
+            if (puja && !selectedPujas.find(p => p.id === pujaId)) {
+                selectedPujas.push(puja);
+                updateItinerary();
+            }
+        }
+
+        function removeFromItinerary(pujaId) {
+            selectedPujas = selectedPujas.filter(p => p.id !== pujaId);
+            updateItinerary();
+            
+            // Uncheck the checkbox
+            const checkbox = document.getElementById(`puja${pujaId}`);
+            const cardCheckbox = document.getElementById(`cardPuja${pujaId}`);
+            if (checkbox) checkbox.checked = false;
+            if (cardCheckbox) cardCheckbox.checked = false;
+        }
+
+        function handleCheckboxChange(pujaId, isChecked) {
+            if (isChecked) {
+                addToItinerary(pujaId);
+            } else {
+                removeFromItinerary(pujaId);
+            }
+        }
+
+        function shareToWhatsApp() {
+            const text = generateItineraryText();
+            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        }
+
+        function shareToFacebook() {
+            const text = generateItineraryText();
+            const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        }
+
+        function shareToEmail() {
+            const text = generateItineraryText();
+            const subject = "My Durga Puja 2025 Itinerary";
+            const body = text;
+            const url = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(url);
+        }
+
+        function copyItineraryText() {
+            const text = generateItineraryText();
+            navigator.clipboard.writeText(text).then(() => {
+                // Show success message
+                const btn = document.getElementById('copyText');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                btn.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                alert('Failed to copy text. Please try again.');
+            });
+        }
+
+        function generateItineraryText() {
+            let text = "🎉 My Durga Puja 2025 Itinerary 🎉\n\n";
+            selectedPujas.forEach((puja, index) => {
+                text += `${index + 1}. ${puja.name}\n`;
+                text += `   📅 Dates: ${puja.dates}\n`;
+                text += `   📍 Location: ${puja.address}\n`;
+                text += `   🔗 ${puja.facebook.includes('facebook.com') ? 'Facebook' : 'Website'}: ${puja.facebook}\n\n`;
+            });
+            text += "Happy Durga Puja! 🕉️";
+            return text;
+        }
+
         // ===== RESPONSIVE BEHAVIOR =====
         window.addEventListener('resize', function() {
             // Handle responsive behavior if needed
         });
     </script>
-
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <h3>Happy Durga Puja!</h3>
-                    <p>May this festive season bring joy, prosperity, and blessings to you and your family.</p>
-                </div>
-                <div class="col-md-4 text-md-end">
-                    <p class="acknowledgement">
-                        <small>
-                            Created with ❤️ by 
-                            <a href="https://www.youtube.com/@NodesofTravel" target="_blank" class="footer-link">
-                                <i class="fab fa-youtube"></i> Nodes of Travel
-                            </a>
-                        </small>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>
